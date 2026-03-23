@@ -1,0 +1,317 @@
+:root {
+    --bg-cream: #F5F1E8;
+    --text-black: #111111;
+    --card-dark: #2F2F2F;
+    --accent-gold: #C8A96A;
+    /* Professional subtle gold */
+    --accent-gold-light: rgba(200, 169, 106, 0.2);
+    --white: #FFFFFF;
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    --shadow-hover: 0 16px 32px rgba(0, 0, 0, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-cream);
+    color: var(--text-black);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    /* padding: 3rem 2rem; */
+    padding-top: 3rem;
+    padding-bottom: 0.3rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+/* -----------------------------
+   Banner Section
+------------------------------ */
+.banner {
+    background: linear-gradient(135deg, var(--text-black) 0%, var(--card-dark) 100%);
+    border-radius: 20px;
+    padding: 3.5rem 2rem;
+    text-align: center;
+    color: var(--white);
+    margin-bottom: 4rem;
+    box-shadow: var(--shadow);
+    max-width: 1200px;
+    /* compact centered banner */
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.banner-logo {
+    width: 64px;
+    height: 64px;
+    background-color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 1.5rem auto;
+    border: 2px solid var(--accent-gold);
+    color: var(--text-black);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.banner h1 {
+    font-size: 2.75rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+}
+
+.banner p {
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    margin-bottom: 2.5rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 400;
+}
+
+.btn-primary {
+    background-color: var(--bg-cream);
+    color: var(--text-black);
+    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+}
+
+.btn-primary:active {
+    transform: translateY(-1px);
+}
+
+/* -----------------------------
+   Institutes Section
+------------------------------ */
+.institutes-section h2 {
+    font-size: 2.2rem;
+    margin-bottom: 3rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: -0.01em;
+}
+
+.institutes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 3rem 2rem;
+}
+
+/* -----------------------------
+   Card Design
+------------------------------ */
+.institute-card {
+    background-color: var(--white);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    height: 100%;
+    min-height: 280px;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.institute-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(200, 169, 106, 0.3);
+}
+
+.card-logo-wrapper {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.btn-card {
+    background-color: var(--text-black);
+    color: var(--white);
+    padding: 0.8rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 50px;
+    margin-top: 1.5rem;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.institute-card:hover .btn-card {
+    background-color: var(--card-dark);
+}
+
+.logo-placeholder {
+    width: 80px;
+    height: 80px;
+    background-color: var(--bg-cream);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-gold);
+    font-size: 1.75rem;
+    font-weight: 700;
+    border: 2px solid var(--accent-gold-light);
+    transition: background-color 0.3s ease;
+}
+
+.institute-logo {
+    max-width: 120px;
+    max-height: 80px;
+    object-fit: contain;
+}
+
+.institute-card:hover .logo-placeholder {
+    background-color: var(--white);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.institute-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-black);
+    text-align: center;
+    margin: 0;
+}
+
+/* Footer Section */
+.simple-footer {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 0 1rem 0;
+    margin-top: auto;
+    /* Push to bottom */
+}
+
+.footer-layout {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #e0ddd3;
+    border-left: none;
+    border-right: none;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.footer-heading {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0 0 0.5rem 0;
+}
+
+.footer-link {
+    color: #555555;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+}
+
+.footer-link:hover {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.footer-note {
+    font-size: 0.8rem;
+    color: #555555;
+    margin: 0.25rem 0 0 0;
+    max-width: 300px;
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid var(--border);
+    /* padding-top: 1rem; */
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #555555;
+}
+
+/* -----------------------------
+   Responsive Design
+------------------------------ */
+@media (min-width: 1024px) {
+    .institutes-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1280px) {
+    .institutes-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .banner h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 650px) {
+    .institutes-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+
+    .banner h1 {
+        font-size: 1.8rem;
+    }
+
+    .banner p {
+        font-size: 1rem;
+    }
+
+    .container {
+        padding: 2rem 1.5rem;
+    }
+}

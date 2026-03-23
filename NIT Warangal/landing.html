@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NITW LaTeX Resume Generator</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo-wrapper">
+                    <img src="https://ik.imagekit.io/syustaging/SYU_PREPROD/LOGO_lXxk8fXqQ.webp?tr=w-3840"
+                        alt="NITW Logo" id="site-logo">
+                </div>
+                <h1>NITW<span class="highlight">Resume</span></h1>
+            </div>
+            <div class="header-actions">
+                <button id="copy-btn" class="btn btn-secondary">
+                    <i data-lucide="copy"></i> Copy code
+                </button>
+                <form method="POST" action="https://www.overleaf.com/docs" target="_blank" id="overleaf-form"
+                    class="inline-form">
+                    <textarea name="snip" id="overleaf-snip" style="display:none;"></textarea>
+                    <button type="submit" id="export-btn" class="btn btn-primary">
+                        <i data-lucide="external-link"></i> Export to Overleaf
+                    </button>
+                </form>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Left Form Workspace -->
+            <section class="form-workspace scrollable">
+
+                <!-- Personal Details -->
+                <div class="form-section">
+                    <h2>Personal Details</h2>
+                    <div class="grid-2">
+                        <div class="input-group">
+                            <label>Full Name</label>
+                            <input type="text" id="pd-name" placeholder="Vadithya Raj Vardhan Nayak">
+                        </div>
+                        <div class="input-group">
+                            <label>Roll Number</label>
+                            <input type="text" id="pd-roll" placeholder="23110349">
+                        </div>
+                        <div class="input-group">
+                            <label>Program / Degree</label>
+                            <input type="text" id="pd-course" placeholder="Bachelors Degree">
+                        </div>
+                        <div class="input-group">
+                            <label>Phone Number</label>
+                            <input type="tel" id="pd-phone" placeholder="9876543210">
+                        </div>
+                        <div class="input-group">
+                            <label>Personal Email</label>
+                            <input type="email" id="pd-emaila" placeholder="personal@email.com">
+                        </div>
+                        <div class="input-group">
+                            <label>Official Email</label>
+                            <input type="email" id="pd-emailb" placeholder="official@nitw.ac.in">
+                        </div>
+                        <div class="input-group">
+                            <label>GitHub Link</label>
+                            <input type="url" id="pd-github" placeholder="github.com/username">
+                        </div>
+                        <div class="input-group">
+                            <label>LinkedIn Link</label>
+                            <input type="url" id="pd-linkedin" placeholder="linkedin.com/in/username">
+                        </div>
+                        <div class="input-group">
+                            <label>Institution Name</label>
+                            <input type="text" id="pd-institution"
+                                placeholder="National Institute Of Technology, Warangal">
+                        </div>
+                        <div class="input-group">
+                            <label>Your Course <span style="font-size:0.75rem;color:var(--text-muted);">(shown in
+                                    header)</span></label>
+                            <input type="text" id="pd-program" placeholder="Computer Science and Engineering">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logo Note Box -->
+                <div class="logo-note-box">
+                    <div class="note-header">
+                        <i data-lucide="info"></i>
+                        <strong>Note: How to display the logo in Overleaf</strong>
+                    </div>
+                    <div class="note-content">
+                        <p>To display the logo correctly in your resume:</p>
+                        <ol>
+                            <li>Download the NIT Warangal logo using the button below.</li>
+                            <li><strong>Upload</strong> this image to your Overleaf project using the Upload button in
+                                the left file panel.</li>
+                            <li>Ensure the uploaded file is named <code>logo.png</code> — it must match the LaTeX code
+                                exactly.</li>
+                        </ol>
+                        <div class="example-box">
+                            <p>This line is already in the generated LaTeX:</p>
+                            <code>\includegraphics[width=2.35cm]{logo.png}</code>
+                        </div>
+                        <p>After uploading and compiling, the logo will appear correctly in your resume.</p>
+                    </div>
+
+                    <!-- Always-visible logo download section -->
+                    <div class="logo-download-section">
+                        <div class="logo-preview-box">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/f/fb/National_Institute_of_Technology%2C_Warangal_logo.png"
+                                alt="NIT Warangal Logo" id="static-logo-preview">
+                        </div>
+                        <div>
+                            <p style="margin:0 0 0.5rem;font-size:0.85rem;font-weight:600;">Click Here for Link to
+                                Download Institution Logo
+                            </p>
+                            <a href="https://upload.wikimedia.org/wikipedia/en/f/fb/National_Institute_of_Technology%2C_Warangal_logo.png"
+                                target="_blank"><button class="btn btn-secondary btn-sm" id="download-logo-btn">
+                                    <i data-lucide="link"></i> Download Link
+                                </button></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="form-section">
+                    <h2>Education</h2>
+                    <p class="section-desc">Add your academic qualifications.</p>
+                    <div id="edu-list" class="item-list"></div>
+                    <div class="form-builder">
+                        <div class="grid-2">
+                            <input type="text" id="edu-inst" placeholder="Institute Name">
+                            <input type="text" id="edu-year" placeholder="Year (e.g., 2021)">
+                            <input type="text" id="edu-degree" placeholder="Degree / Course">
+                            <input type="text" id="edu-cgpa" placeholder="CGPA/Percentage">
+                        </div>
+                        <button class="btn btn-outline" id="add-edu-btn">
+                            <i data-lucide="plus"></i> Add Education
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Experience (Toggleable) -->
+                <div class="form-section">
+                    <div class="section-header-row">
+                        <h2>Experience</h2>
+                        <label class="switch" title="Toggle Experience section">
+                            <input type="checkbox" id="toggle-experience" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="toggleable-content active" id="experience-content">
+                        <p class="section-desc">Add your work experience and internships.</p>
+                        <div id="exp-list" class="item-list"></div>
+                        <div class="form-builder">
+                            <div class="grid-2">
+                                <input type="text" id="exp-company" placeholder="Company Name">
+                                <input type="text" id="exp-city" placeholder="City">
+                                <input type="text" id="exp-role" placeholder="Your Role">
+                                <input type="text" id="exp-duration" placeholder="Duration (e.g. Summer 2023)">
+                            </div>
+                            <div id="exp-desc-container">
+                                <div class="dynamic-input-row">
+                                    <textarea class="exp-desc-input auto-expand" rows="2"
+                                        placeholder="Work description line 1 — describe your impact"></textarea>
+                                    <button type="button" class="btn btn-danger btn-sm remove-desc-init"><i
+                                            data-lucide="x"></i></button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-outline btn-sm" id="add-exp-desc-btn"
+                                style="margin-bottom: 0.5rem;">
+                                <i data-lucide="plus"></i> Add Description
+                            </button>
+                            <button class="btn btn-outline" id="add-exp-btn">
+                                <i data-lucide="plus"></i> Add Experience
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certifications (Toggleable) -->
+                <div class="form-section">
+                    <div class="section-header-row">
+                        <h2>Certifications</h2>
+                        <label class="switch" title="Toggle Certifications section">
+                            <input type="checkbox" id="toggle-certifications" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="toggleable-content active" id="certifications-content">
+                        <p class="section-desc">Add your professional certifications.</p>
+                        <div id="cert-list" class="item-list"></div>
+                        <div class="form-builder">
+                            <div class="grid-2">
+                                <input type="text" id="cert-title" placeholder="Certification Name">
+                                <input type="text" id="cert-issuer" placeholder="Issuing Organization">
+                                <input type="text" id="cert-year" placeholder="Year">
+                            </div>
+                            <input type="text" id="cert-desc"
+                                placeholder="Brief description or credential ID (optional)">
+                            <button class="btn btn-outline" id="add-cert-btn">
+                                <i data-lucide="plus"></i> Add Certification
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Extracurricular (Toggleable) -->
+                <div class="form-section">
+                    <div class="section-header-row">
+                        <h2>Extracurricular Activities</h2>
+                        <label class="switch" title="Toggle Extracurricular section">
+                            <input type="checkbox" id="toggle-extracurricular" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="toggleable-content active" id="extracurricular-content">
+                        <p class="section-desc">Add clubs, sports, volunteering, and other activities.</p>
+                        <div id="extra-list" class="item-list"></div>
+                        <div class="form-builder">
+                            <div class="grid-2">
+                                <input type="text" id="extra-activity" placeholder="Activity / Club Name">
+                                <input type="text" id="extra-role" placeholder="Your Role">
+                                <input type="text" id="extra-duration" placeholder="Duration (e.g. 2022-23)">
+                            </div>
+                            <input type="text" id="extra-desc" placeholder="Brief description of your contribution">
+                            <button class="btn btn-outline" id="add-extra-btn">
+                                <i data-lucide="plus"></i> Add Activity
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Projects -->
+                <div class="form-section">
+                    <h2>Personal Projects</h2>
+                    <p class="section-desc">Showcase your best projects.</p>
+                    <div id="proj-list" class="item-list"></div>
+                    <div class="form-builder">
+                        <div class="grid-2">
+                            <input type="text" id="proj-name" placeholder="Project Name">
+                            <input type="text" id="proj-duration" placeholder="Duration">
+                        </div>
+                        <input type="text" id="proj-short-desc" placeholder="Project description (Your role/input)">
+                        <div id="proj-desc-container">
+                            <div class="dynamic-input-row">
+                                <textarea class="proj-desc-input auto-expand" rows="2"
+                                    placeholder="Tools and Techonologies used: Soil sensor, Arduino UNO"></textarea>
+                                <button type="button" class="btn btn-danger btn-sm remove-desc-init"><i
+                                        data-lucide="x"></i></button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-outline btn-sm" id="add-proj-desc-btn"
+                            style="margin-bottom: 0.5rem;">
+                            <i data-lucide="plus"></i> Add Description
+                        </button>
+                        <button class="btn btn-outline" id="add-proj-btn">
+                            <i data-lucide="plus"></i> Add Project
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Technical Skills (Toggleable + Sub-toggles) -->
+                <div class="form-section">
+                    <div class="section-header-row">
+                        <h2>Technical Skills and Interests</h2>
+                        <label class="switch" title="Toggle Skills section">
+                            <input type="checkbox" id="toggle-skills" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="toggleable-content active" id="skills-content">
+
+                        <div class="skill-toggle-row">
+                            <div class="skill-label-group">
+                                <label for="sk-prog">Languages</label>
+                            </div>
+                            <label class="switch switch-sm">
+                                <input type="checkbox" id="sk-toggle-prog" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <input type="text" id="sk-prog" placeholder="C++, Python, Java">
+
+                        <div class="skill-toggle-row">
+                            <div class="skill-label-group">
+                                <label for="sk-tools">Developer Tools</label>
+                            </div>
+                            <label class="switch switch-sm">
+                                <input type="checkbox" id="sk-toggle-tools" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <input type="text" id="sk-tools" placeholder="VS Code, Git, Docker">
+
+                        <div class="skill-toggle-row">
+                            <div class="skill-label-group">
+                                <label for="sk-frame">Frameworks</label>
+                            </div>
+                            <label class="switch switch-sm">
+                                <input type="checkbox" id="sk-toggle-frame" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <input type="text" id="sk-frame" placeholder="React, Node.js">
+
+                        <div class="skill-toggle-row">
+                            <div class="skill-label-group">
+                                <label for="sk-cloud">Cloud / Databases</label>
+                            </div>
+                            <label class="switch switch-sm">
+                                <input type="checkbox" id="sk-toggle-cloud" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <input type="text" id="sk-cloud" placeholder="AWS, MongoDB">
+
+                        <div class="skill-toggle-row">
+                            <div class="skill-label-group">
+                                <label for="sk-soft">Soft Skills</label>
+                            </div>
+                            <label class="switch switch-sm">
+                                <input type="checkbox" id="sk-toggle-soft" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <input type="text" id="sk-soft" placeholder="Leadership, Communication">
+
+                        <div class="skill-toggle-row">
+                            <div class="skill-label-group">
+                                <label for="sk-course">Coursework</label>
+                            </div>
+                            <label class="switch switch-sm">
+                                <input type="checkbox" id="sk-toggle-course" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <input type="text" id="sk-course" placeholder="OS, DBMS, AI">
+
+                        <div class="skill-toggle-row">
+                            <div class="skill-label-group">
+                                <label for="sk-interest">Areas of Interest</label>
+                            </div>
+                            <label class="switch switch-sm">
+                                <input type="checkbox" id="sk-toggle-interest" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <input type="text" id="sk-interest" placeholder="Machine Learning, Web Dev">
+
+                    </div>
+                </div>
+
+                <!-- Internships (Toggleable) -->
+                <!-- <div class="form-section">
+                    <div class="section-header-row">
+                        <h2>Internships</h2>
+                        <label class="switch" title="Toggle Internships section">
+                            <input type="checkbox" id="toggle-internships" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="toggleable-content active" id="internships-content">
+                        <p class="section-desc">Add your internship experiences here.</p>
+                        <div id="intern-list" class="item-list"></div>
+                        <div class="form-builder">
+                            <div class="grid-2">
+                                <input type="text" id="intern-company" placeholder="Company Name">
+                                <input type="text" id="intern-role" placeholder="Role (e.g. Software Intern)">
+                                <input type="text" id="intern-dur" placeholder="Duration (e.g. June - Aug 2023)">
+                            </div>
+                            <input type="text" id="intern-desc" placeholder="Brief description of your work">
+                            <button class="btn btn-outline" id="add-intern-btn">
+                                <i data-lucide="plus"></i> Add Internship
+                            </button>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Positions of Responsibility (Toggleable) -->
+                <div class="form-section">
+                    <div class="section-header-row">
+                        <h2>Positions of Responsibility</h2>
+                        <label class="switch" title="Toggle POR section">
+                            <input type="checkbox" id="toggle-por" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="toggleable-content active" id="por-content">
+                        <p class="section-desc">Add your leadership roles and responsibilities.</p>
+                        <div id="por-list" class="item-list"></div>
+                        <div class="form-builder">
+                            <div class="grid-2">
+                                <input type="text" id="por-pos" placeholder="Position (e.g. Secretary)">
+                                <input type="text" id="por-org" placeholder="Organization (e.g. Students' Council)">
+                                <input type="text" id="por-dur" placeholder="Duration (e.g. 2022-23)">
+                            </div>
+                            <input type="text" id="por-desc" placeholder="Description of your responsibilities">
+                            <button class="btn btn-outline" id="add-por-btn">
+                                <i data-lucide="plus"></i> Add Position
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievements -->
+                <div class="form-section">
+                    <h2>Achievements</h2>
+                    <p class="section-desc">Add your academic and non-academic achievements.</p>
+                    <div id="ach-list" class="item-list"></div>
+                    <div class="form-builder">
+                        <div class="grid-2">
+                            <input type="text" id="ach-title" placeholder="Achievement Name (e.g. Ranked 1st)">
+                            <input type="text" id="ach-year" placeholder="Year (e.g. 2023)">
+                        </div>
+                        <input type="text" id="ach-desc" placeholder="Brief description (e.g. Out of 500 students)">
+                        <button class="btn btn-outline" id="add-ach-btn">
+                            <i data-lucide="plus"></i> Add Achievement
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Right Preview Workspace -->
+            <section class="preview-workspace">
+                <div class="preview-header">
+                    <div class="tabs">
+                        <button class="tab-btn active" id="tab-visual"><i data-lucide="layout-template"></i> Visual
+                            Preview</button>
+                        <button class="tab-btn" id="tab-code"><i data-lucide="code"></i> LaTeX Code</button>
+                    </div>
+                    <div class="status-indicator">
+                        <span class="pulse"></span> Live Update Active
+                    </div>
+                </div>
+
+                <div class="preview-notice">
+                    <i data-lucide="info"></i>
+                    This preview provides an approximation of the layout and may differ slightly from the final LaTeX
+                    PDF output. Please note that some fields are optional and can be left blank.
+                </div>
+
+                <!-- Visual Preview Pane -->
+                <div class="visual-container active" id="visual-pane">
+                    <div class="resume-paper" id="resume-preview">
+                        <div class="preview-placeholder">Fill in your details to see the preview</div>
+                    </div>
+                </div>
+
+                <!-- Code Preview Pane -->
+                <div class="code-container" id="code-pane">
+                    <pre><code id="latex-preview-code" class="language-latex"></code></pre>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
