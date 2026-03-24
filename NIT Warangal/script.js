@@ -87,7 +87,15 @@ const LATEX_TEMPLATE = `%-------------------------
         \\textbf{#1}{,}\\hspace{1mm}\\small{#2} & \\textit{\\footnotesize{#3}} 
     \\end{tabularx}
     \\vspace{-0.5mm}\\hspace{0mm}\\small{#4}
-    \\vspace{-1mm}
+    \\vspace{-3mm}
+}
+
+\\newcommand{\\resumePO}[4]{
+\\vspace{0.5mm}\\item
+    \\begin{tabularx}{0.98\\textwidth}[t]{X@{\\extracolsep{\\fill}}r}
+        \\textbf{#1}{,}\\hspace{1mm}\\small{#2} & \\textit{\\footnotesize{#3}} 
+    \\end{tabularx}
+    \\vspace{-3mm}
 }
 
 \\newcommand{\\resumeSubheading}[4]{
@@ -683,7 +691,11 @@ function generate() {
     if (state.toggles.certifications && state.certifications.length > 0) {
         let certTex = "";
         state.certifications.forEach(c => {
-            certTex += `\\resumePOR{${escapeLatex(c.title)}}{${escapeLatex(c.issuer)}}{${escapeLatex(c.yr)}}{${escapeLatex(c.desc)}}\n`;
+            if (c.desc && c.desc.trim() !== "") {
+                certTex += `\\resumePOR{${escapeLatex(c.title)}}{${escapeLatex(c.issuer)}}{${escapeLatex(c.yr)}}{${escapeLatex(c.desc)}}\n`;
+            } else {
+                certTex += `\\resumePO{${escapeLatex(c.title)}}{${escapeLatex(c.issuer)}}{${escapeLatex(c.yr)}}{}\n`;
+            }
         });
         certBlock = `%-----------Certifications-----------------\n\\section{\\textbf{Certifications}}\n\\vspace{-0.4mm}\n\\resumeSubHeadingListStart\n${certTex}\\resumeSubHeadingListEnd\n\\vspace{-5mm}\n\n`;
     }
@@ -694,7 +706,11 @@ function generate() {
     if (state.toggles.extracurricular && state.extracurricular.length > 0) {
         let extraTex = "";
         state.extracurricular.forEach(e => {
-            extraTex += `\\resumePOR{${escapeLatex(e.activity)}}{${escapeLatex(e.role)}}{${escapeLatex(e.duration)}}{${escapeLatex(e.desc)}}\n`;
+            if (e.desc && e.desc.trim() !== "") {
+                extraTex += `\\resumePOR{${escapeLatex(e.activity)}}{${escapeLatex(e.role)}}{${escapeLatex(e.duration)}}{${escapeLatex(e.desc)}}\n`;
+            } else {
+                extraTex += `\\resumePO{${escapeLatex(e.activity)}}{${escapeLatex(e.role)}}{${escapeLatex(e.duration)}}{}\n`;
+            }
         });
         extraBlock = `%-----------Extracurricular-----------------\n\\section{\\textbf{Extracurricular Activities}}\n\\vspace{-0.4mm}\n\\resumeSubHeadingListStart\n${extraTex}\\resumeSubHeadingListEnd\n\\vspace{-5mm}\n\n`;
     }
@@ -716,7 +732,11 @@ function generate() {
     if (state.toggles.por && state.por.length > 0) {
         let porTex = "";
         state.por.forEach(p => {
-            porTex += `\\resumePOR{${escapeLatex(p.pos)}}{${escapeLatex(p.org)}}{${escapeLatex(p.dur)}}{${escapeLatex(p.desc)}}\n`;
+            if (p.desc && p.desc.trim() !== "") {
+                porTex += `\\resumePOR{${escapeLatex(p.pos)}}{${escapeLatex(p.org)}}{${escapeLatex(p.dur)}}{${escapeLatex(p.desc)}}\n`;
+            } else {
+                porTex += `\\resumePO{${escapeLatex(p.pos)}}{${escapeLatex(p.org)}}{${escapeLatex(p.dur)}}{}\n`;
+            }
         });
         porBlock = `%-----------Positions of Responsibility-----------------\n\\section{\\textbf{Positions of Responsibility}}\n\\vspace{-0.4mm}\n\\resumeSubHeadingListStart\n${porTex}\\resumeSubHeadingListEnd\n\\vspace{-5mm}\n\n`;
     }
